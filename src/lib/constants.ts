@@ -3,31 +3,31 @@ import { EggType } from "./types";
 export const EGG_TYPES: EggType[] = [
   {
     id: "soft",
-    name: "Soft Boiled",
+    name: "Soft",
     time: 180,
     emoji: "🥚",
     description: "3 min",
   },
   {
     id: "medium",
-    name: "Medium Boiled",
-    time: 420,
+    name: "Medium",
+    time: 360,
     emoji: "🍳",
-    description: "7 min",
+    description: "6 min",
   },
   {
     id: "hard",
-    name: "Hard Boiled",
-    time: 600,
+    name: "Hard",
+    time: 540,
     emoji: "🥚",
-    description: "10 min",
+    description: "9 min",
   },
   {
     id: "custom",
     name: "Custom",
-    time: 300,
+    time: 0, // Will be set dynamically
     emoji: "⏱️",
-    description: "5 min",
+    description: "Set time",
   },
 ];
 
