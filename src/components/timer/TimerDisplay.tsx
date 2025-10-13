@@ -16,9 +16,8 @@ const TimerDisplayComponent: React.FC<TimerDisplayProps> = ({
       <div
         className={cn(
           "text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold transition-all duration-500",
-          isCompleted ? "text-green-600 scale-110" : ""
+          isCompleted ? "text-green-600 scale-110" : "text-gray-800"
         )}
-        style={{ color: isCompleted ? undefined : "#2f4858" }}
         role="timer"
         aria-live="polite"
         aria-label={`Time remaining: ${formatTime(timeLeft)}`}

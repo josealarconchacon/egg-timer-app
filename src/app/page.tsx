@@ -63,20 +63,16 @@ export default function Home() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100">
+    <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white border-b border-slate-200">
+      <header className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center">
-            <div
-              className="w-8 h-8 rounded-full mr-3"
-              style={{ backgroundColor: "#2f4858" }}
-            ></div>
-            <h1
-              className="text-xl sm:text-2xl font-bold"
-              style={{ color: "#2f4858" }}
-            >
-              EggTimer
+            <div className="w-8 h-8 rounded-full bg-indigo-600 mr-3 flex items-center justify-center">
+              <span className="text-white text-lg">⏲</span>
+            </div>
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-800">
+              eggTimer
             </h1>
           </div>
         </div>
@@ -85,14 +81,11 @@ export default function Home() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         {/* Hero Section */}
         <div className="text-center mb-8 sm:mb-12">
-          <h2
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4"
-            style={{ color: "#2f4858" }}
-          >
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-gray-800">
             Perfect Eggs, Every Time
           </h2>
 
-          <p className="text-sm sm:text-base" style={{ color: "#748ea0" }}>
+          <p className="text-sm sm:text-base text-gray-500">
             Select your preferred doneness and start the timer!
           </p>
         </div>
@@ -102,13 +95,10 @@ export default function Home() {
           {/* Left Column - Timer Controls */}
           <div className="order-2 lg:order-1">
             <Card className="h-full">
-              <div className="space-y-6 sm:space-y-8">
+              <div className="space-y-6 sm:space-y-8 pb-24 lg:pb-0">
                 {/* Egg Size Selection */}
                 <div>
-                  <h3
-                    className="text-lg font-semibold mb-4"
-                    style={{ color: "#2f4858" }}
-                  >
+                  <h3 className="text-lg font-semibold mb-4 text-gray-800">
                     Egg Size
                   </h3>
                   <EggSizeSelector
@@ -121,13 +111,10 @@ export default function Home() {
 
                 {/* Egg Type Selection */}
                 <div>
-                  <h3
-                    className="text-lg font-semibold mb-2"
-                    style={{ color: "#2f4858" }}
-                  >
+                  <h3 className="text-lg font-semibold mb-2 text-gray-800">
                     Doneness Level
                   </h3>
-                  <p className="text-sm mb-4" style={{ color: "#748ea0" }}>
+                  <p className="text-sm mb-4 text-gray-500">
                     Time will auto-adjust based on egg size
                   </p>
                   <EggTypeSelector
@@ -138,14 +125,16 @@ export default function Home() {
                   />
                 </div>
 
-                {/* Launch Timer Button */}
-                <div className="text-center">
-                  <TimerControls
-                    isRunning={isRunning}
-                    onStart={start}
-                    onPause={pause}
-                    onReset={reset}
-                  />
+                {/* Launch Timer Button - Sticky on mobile */}
+                <div className="lg:text-center">
+                  <div className="lg:static fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm p-4 border-t border-gray-200 lg:border-0 lg:p-0 lg:bg-transparent lg:backdrop-blur-none z-10 shadow-lg lg:shadow-none">
+                    <TimerControls
+                      isRunning={isRunning}
+                      onStart={start}
+                      onPause={pause}
+                      onReset={reset}
+                    />
+                  </div>
                 </div>
               </div>
             </Card>
@@ -156,11 +145,8 @@ export default function Home() {
             <Card className="h-full flex items-center justify-center">
               <div className="text-center">
                 <div className="mb-4">
-                  <p
-                    className="text-lg sm:text-xl mb-2"
-                    style={{ color: "#516a7b" }}
-                  >
-                    Ready in
+                  <p className="text-lg sm:text-xl mb-2 text-gray-600">
+                    Ready In
                   </p>
                   <div className="relative">
                     <div className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 mx-auto relative">
@@ -185,16 +171,10 @@ export default function Home() {
         {/* Educational Section */}
         <div className="mb-12">
           <div className="text-center mb-8">
-            <h3
-              className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4"
-              style={{ color: "#2f4858" }}
-            >
+            <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-gray-800">
               Everything you need to know about Eggs
             </h3>
-            <p
-              className="text-sm sm:text-base md:text-lg max-w-3xl mx-auto"
-              style={{ color: "#516a7b" }}
-            >
+            <p className="text-sm sm:text-base md:text-lg max-w-3xl mx-auto text-gray-600">
               Egg cooking is an art of timing, it is only a matter of seconds to
               make a mistake
             </p>
@@ -202,20 +182,12 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             {/* Hard Boiled */}
-            <div className="bg-white rounded-xl p-6 border border-slate-200">
+            <div className="bg-white rounded-xl p-6 border border-gray-200">
               <div className="flex items-start space-x-4">
-                <div
-                  className="w-3 h-3 rounded-full mt-2 flex-shrink-0"
-                  style={{ backgroundColor: "#2f4858" }}
-                ></div>
+                <div className="w-3 h-3 rounded-full mt-2 flex-shrink-0 bg-indigo-600"></div>
                 <div>
-                  <h4
-                    className="text-lg font-bold mb-2"
-                    style={{ color: "#2f4858" }}
-                  >
-                    Hard
-                  </h4>
-                  <p className="text-sm" style={{ color: "#516a7b" }}>
+                  <h4 className="text-lg font-bold mb-2 text-gray-800">Hard</h4>
+                  <p className="text-sm text-gray-600">
                     Firm yolk and whites, ideal for snacks or salads
                   </p>
                 </div>
@@ -223,20 +195,12 @@ export default function Home() {
             </div>
 
             {/* Soft Boiled */}
-            <div className="bg-white rounded-xl p-6 border border-slate-200">
+            <div className="bg-white rounded-xl p-6 border border-gray-200">
               <div className="flex items-start space-x-4">
-                <div
-                  className="w-3 h-3 rounded-full mt-2 flex-shrink-0"
-                  style={{ backgroundColor: "#2f4858" }}
-                ></div>
+                <div className="w-3 h-3 rounded-full mt-2 flex-shrink-0 bg-indigo-600"></div>
                 <div>
-                  <h4
-                    className="text-lg font-bold mb-2"
-                    style={{ color: "#2f4858" }}
-                  >
-                    Soft
-                  </h4>
-                  <p className="text-sm" style={{ color: "#516a7b" }}>
+                  <h4 className="text-lg font-bold mb-2 text-gray-800">Soft</h4>
+                  <p className="text-sm text-gray-600">
                     Creamy yolk center with fully set whites
                   </p>
                 </div>
@@ -244,20 +208,14 @@ export default function Home() {
             </div>
 
             {/* Liquid Boiled */}
-            <div className="bg-white rounded-xl p-6 border border-slate-200">
+            <div className="bg-white rounded-xl p-6 border border-gray-200">
               <div className="flex items-start space-x-4">
-                <div
-                  className="w-3 h-3 rounded-full mt-2 flex-shrink-0"
-                  style={{ backgroundColor: "#2f4858" }}
-                ></div>
+                <div className="w-3 h-3 rounded-full mt-2 flex-shrink-0 bg-indigo-600"></div>
                 <div>
-                  <h4
-                    className="text-lg font-bold mb-2"
-                    style={{ color: "#2f4858" }}
-                  >
+                  <h4 className="text-lg font-bold mb-2 text-gray-800">
                     Liquid
                   </h4>
-                  <p className="text-sm" style={{ color: "#516a7b" }}>
+                  <p className="text-sm text-gray-600">
                     Runny yolk, tender whites, perfect for dipping
                   </p>
                 </div>
@@ -267,17 +225,11 @@ export default function Home() {
         </div>
 
         {/* Tips Section */}
-        <div className="bg-white rounded-xl p-6 border border-slate-200">
-          <h4
-            className="text-lg font-semibold mb-4"
-            style={{ color: "#2f4858" }}
-          >
+        <div className="bg-white rounded-xl p-6 border border-gray-200">
+          <h4 className="text-lg font-semibold mb-4 text-gray-800">
             💡 Pro Tips
           </h4>
-          <div
-            className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm"
-            style={{ color: "#516a7b" }}
-          >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-600">
             <div>
               <p>
                 <strong>Egg Size Matters:</strong> Larger eggs need more cooking
@@ -319,9 +271,9 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-white border-t border-slate-200 fixed bottom-0 w-full">
+      <footer className="bg-white border-t border-gray-200 mt-12 mb-20 lg:mb-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <p className="text-center text-sm" style={{ color: "#748ea0" }}>
+          <p className="text-center text-sm text-gray-500">
             Copyright © 2025 - Jose.
           </p>
         </div>
