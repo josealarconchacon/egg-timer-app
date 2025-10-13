@@ -210,16 +210,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-
-          {/* Illustration */}
-          <div className="text-center">
-            <div
-              className="inline-flex items-center justify-center w-32 h-32 rounded-full"
-              style={{ backgroundColor: "#748ea0" }}
-            >
-              <div className="text-6xl">🐔</div>
-            </div>
-          </div>
         </div>
 
         {/* Tips Section */}
@@ -269,7 +259,7 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-white border-t border-slate-200 mt-16">
+      <footer className="bg-white border-t border-slate-200 fixed bottom-0 w-full">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <p className="text-center text-sm" style={{ color: "#748ea0" }}>
             Copyright © 2025 - Jose.

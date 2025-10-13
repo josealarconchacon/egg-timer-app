@@ -43,7 +43,7 @@ const TimerControlsComponent: React.FC<TimerControlsProps> = ({
         className="w-full xs:w-auto px-6 py-4"
       >
         <RotateCcw size={20} />
-        <span className="hidden xs:inline">Reset</span>
+        <span>Reset</span>
       </Button>
     </div>
   );
