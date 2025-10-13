@@ -11,23 +11,38 @@ class AudioService {
         this.audio.preload = "auto";
         this.audio.volume = 0.7;
         this.isInitialized = true;
+        console.log(
+          "Audio initialized successfully with URL:",
+          AUDIO_NOTIFICATION_URL
+        );
       } catch (error) {
-        console.warn("Failed to initialize audio:", error);
+        console.error("Failed to initialize audio:", error);
       }
     }
   }
 
   async play(): Promise<void> {
+    console.log("Attempting to play audio...");
+
+    // Initialize on first play if not already done
+    if (!this.audio && typeof window !== "undefined") {
+      console.log("Audio not initialized, initializing now...");
+      this.initialize();
+    }
+
     if (!this.audio) {
-      console.warn("Audio not initialized");
+      console.warn("Audio not initialized, trying fallback beep");
+      // Try fallback beep sound
+      this.playSystemNotification();
       return;
     }
 
     try {
       this.audio.currentTime = 0;
       await this.audio.play();
+      console.log("Audio played successfully!");
     } catch (error) {
-      console.warn("Audio play failed:", error);
+      console.error("Audio play failed:", error);
       // Fallback: try to play system notification sound
       this.playSystemNotification();
     }
@@ -36,8 +51,16 @@ class AudioService {
   private playSystemNotification(): void {
     try {
       // Create a simple beep sound as fallback
-      const audioContext = new (window.AudioContext ||
-        (window as any).webkitAudioContext)();
+      const AudioContextClass =
+        window.AudioContext ||
+        (
+          window as Window &
+            typeof globalThis & { webkitAudioContext?: typeof AudioContext }
+        ).webkitAudioContext;
+
+      if (!AudioContextClass) return;
+
+      const audioContext = new AudioContextClass();
       const oscillator = audioContext.createOscillator();
       const gainNode = audioContext.createGain();
 

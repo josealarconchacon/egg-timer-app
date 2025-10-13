@@ -1,16 +1,21 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React, { useMemo, useState, useCallback } from "react";
 import { useTimer } from "@/hooks/useTimer";
+import { useSound } from "@/hooks/useSound";
 import { EggTypeSelector } from "@/components/timer/EggTypeSelector";
+import { EggSizeSelector } from "@/components/timer/EggSizeSelector";
 import { TimerProgress } from "@/components/timer/TimerProgress";
 import { TimerDisplay } from "@/components/timer/TimerDisplay";
 import { TimerControls } from "@/components/timer/TimerControls";
 import { Card } from "@/components/ui/Card";
-import { EGG_TYPES } from "@/lib/constants";
+import { EGG_TYPES, EGG_SIZES } from "@/lib/constants";
 import { calculateProgress } from "@/lib/utils";
 
 export default function Home() {
+  const [selectedEggSizeId, setSelectedEggSizeId] = useState("medium");
+  const [baseTime, setBaseTime] = useState(179); // Default to Liquid egg base time
+
   const {
     selectedTime,
     timeLeft,
@@ -20,7 +25,37 @@ export default function Home() {
     pause,
     reset,
     setTime,
-  } = useTimer(180);
+  } = useTimer(179);
+
+  // Initialize sound to play when timer completes
+  useSound(isCompleted);
+
+  // Calculate adjusted time based on egg size
+  const getAdjustedTime = useCallback((time: number, sizeId: string) => {
+    const eggSize = EGG_SIZES.find((size) => size.id === sizeId);
+    if (!eggSize) return time;
+    return Math.round(time * eggSize.timeMultiplier);
+  }, []);
+
+  // Handle egg type selection
+  const handleEggTypeSelect = useCallback(
+    (time: number) => {
+      setBaseTime(time);
+      const adjustedTime = getAdjustedTime(time, selectedEggSizeId);
+      setTime(adjustedTime);
+    },
+    [selectedEggSizeId, getAdjustedTime, setTime]
+  );
+
+  // Handle egg size selection
+  const handleEggSizeSelect = useCallback(
+    (sizeId: string) => {
+      setSelectedEggSizeId(sizeId);
+      const adjustedTime = getAdjustedTime(baseTime, sizeId);
+      setTime(adjustedTime);
+    },
+    [baseTime, getAdjustedTime, setTime]
+  );
 
   const progress = useMemo(
     () => calculateProgress(selectedTime, timeLeft),
@@ -68,18 +103,37 @@ export default function Home() {
           <div className="order-2 lg:order-1">
             <Card className="h-full">
               <div className="space-y-6 sm:space-y-8">
-                {/* Egg Type Selection */}
+                {/* Egg Size Selection */}
                 <div>
                   <h3
                     className="text-lg font-semibold mb-4"
                     style={{ color: "#2f4858" }}
                   >
-                    Choose Your Egg Type
+                    Egg Size
                   </h3>
+                  <EggSizeSelector
+                    eggSizes={EGG_SIZES}
+                    selectedSizeId={selectedEggSizeId}
+                    onSelect={handleEggSizeSelect}
+                    disabled={isRunning}
+                  />
+                </div>
+
+                {/* Egg Type Selection */}
+                <div>
+                  <h3
+                    className="text-lg font-semibold mb-2"
+                    style={{ color: "#2f4858" }}
+                  >
+                    Doneness Level
+                  </h3>
+                  <p className="text-sm mb-4" style={{ color: "#748ea0" }}>
+                    Time will auto-adjust based on egg size
+                  </p>
                   <EggTypeSelector
                     eggTypes={EGG_TYPES}
                     selectedTime={selectedTime}
-                    onSelect={setTime}
+                    onSelect={handleEggTypeSelect}
                     disabled={isRunning}
                   />
                 </div>
@@ -168,27 +222,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Medium Boiled */}
-            <div className="bg-white rounded-xl p-6 border border-slate-200">
-              <div className="flex items-start space-x-4">
-                <div
-                  className="w-3 h-3 rounded-full mt-2 flex-shrink-0"
-                  style={{ backgroundColor: "#2f4858" }}
-                ></div>
-                <div>
-                  <h4
-                    className="text-lg font-bold mb-2"
-                    style={{ color: "#2f4858" }}
-                  >
-                    Medium
-                  </h4>
-                  <p className="text-sm" style={{ color: "#516a7b" }}>
-                    Creamy yolk center with fully set whites
-                  </p>
-                </div>
-              </div>
-            </div>
-
             {/* Soft Boiled */}
             <div className="bg-white rounded-xl p-6 border border-slate-200">
               <div className="flex items-start space-x-4">
@@ -204,7 +237,28 @@ export default function Home() {
                     Soft
                   </h4>
                   <p className="text-sm" style={{ color: "#516a7b" }}>
-                    Runny yolk, tender whites, perfect for dipping.
+                    Creamy yolk center with fully set whites
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Liquid Boiled */}
+            <div className="bg-white rounded-xl p-6 border border-slate-200">
+              <div className="flex items-start space-x-4">
+                <div
+                  className="w-3 h-3 rounded-full mt-2 flex-shrink-0"
+                  style={{ backgroundColor: "#2f4858" }}
+                ></div>
+                <div>
+                  <h4
+                    className="text-lg font-bold mb-2"
+                    style={{ color: "#2f4858" }}
+                  >
+                    Liquid
+                  </h4>
+                  <p className="text-sm" style={{ color: "#516a7b" }}>
+                    Runny yolk, tender whites, perfect for dipping
                   </p>
                 </div>
               </div>
@@ -224,6 +278,12 @@ export default function Home() {
             className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm"
             style={{ color: "#516a7b" }}
           >
+            <div>
+              <p>
+                <strong>Egg Size Matters:</strong> Larger eggs need more cooking
+                time - use our size selector above!
+              </p>
+            </div>
             <div>
               <p>
                 <strong>Start Timing:</strong> Begin once the water reaches a

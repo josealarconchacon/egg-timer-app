@@ -1,26 +1,26 @@
-import { EggType } from "./types";
+import { EggType, EggSize } from "./types";
 
 export const EGG_TYPES: EggType[] = [
   {
     id: "soft",
-    name: "Soft",
-    time: 180,
+    name: "Liquid",
+    time: 179,
     emoji: "🥚",
-    description: "3 min",
+    description: "2:59",
   },
   {
     id: "medium",
-    name: "Medium",
-    time: 360,
+    name: "Soft",
+    time: 218,
     emoji: "🍳",
-    description: "6 min",
+    description: "3:38",
   },
   {
     id: "hard",
     name: "Hard",
-    time: 540,
+    time: 304,
     emoji: "🥚",
-    description: "9 min",
+    description: "5:04",
   },
   {
     id: "custom",
@@ -31,5 +31,42 @@ export const EGG_TYPES: EggType[] = [
   },
 ];
 
+// Egg sizes based on standard classifications
+// Time multipliers are based on the physics of heat transfer (proportional to diameter²)
+export const EGG_SIZES: EggSize[] = [
+  {
+    id: "small",
+    name: "Small",
+    diameter: '1.75"',
+    weight: "1.5-1.9oz",
+    timeMultiplier: 0.85, // -15% cooking time
+    emoji: "🥚",
+  },
+  {
+    id: "medium",
+    name: "Medium",
+    diameter: '2"',
+    weight: "1.9-2.2oz",
+    timeMultiplier: 1.0, // Standard/base time
+    emoji: "🥚",
+  },
+  {
+    id: "large",
+    name: "Large",
+    diameter: '2.25"',
+    weight: "2.2-2.6oz",
+    timeMultiplier: 1.15, // +15% cooking time
+    emoji: "🥚",
+  },
+  {
+    id: "xlarge",
+    name: "X-Large",
+    diameter: '2.4"',
+    weight: "2.6oz+",
+    timeMultiplier: 1.3, // +30% cooking time
+    emoji: "🥚",
+  },
+];
+
 export const AUDIO_NOTIFICATION_URL =
-  "data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBTGH0fPTgjMGHm7A7+OZUQ0PVqzn7bJiHgU2jdXvz3ctBiZ9zPDhkz0KFmG46+ukWhELTKXh8bllHAU0iM/vz3YqBSOByvDekj8JFV666+ujWRIKSqPi8r5tIAYxhtDyz3gsB";
+  "/sounds/mixkit-vintage-telephone-ringtone-1356.wav";

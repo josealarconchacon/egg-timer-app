@@ -6,6 +6,15 @@ export interface EggType {
   description: string;
 }
 
+export interface EggSize {
+  id: string;
+  name: string;
+  diameter: string; // in inches
+  weight: string; // in ounces
+  timeMultiplier: number; // multiplier for base cooking time
+  emoji: string;
+}
+
 export interface TimerState {
   selectedTime: number;
   timeLeft: number;

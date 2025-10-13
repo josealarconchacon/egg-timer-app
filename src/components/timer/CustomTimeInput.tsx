@@ -76,7 +76,6 @@ export const CustomTimeInput: React.FC<CustomTimeInputProps> = ({
                 className="w-20 px-3 py-2 border border-gray-300 rounded-lg text-center text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-offset-2"
                 style={{
                   borderColor: "#748ea0",
-                  focusRingColor: "#2f4858",
                 }}
               />
             </div>
@@ -101,7 +100,6 @@ export const CustomTimeInput: React.FC<CustomTimeInputProps> = ({
                 className="w-20 px-3 py-2 border border-gray-300 rounded-lg text-center text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-offset-2"
                 style={{
                   borderColor: "#748ea0",
-                  focusRingColor: "#2f4858",
                 }}
               />
             </div>
