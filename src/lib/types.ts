@@ -9,9 +9,9 @@ export interface EggType {
 export interface EggSize {
   id: string;
   name: string;
-  diameter: string; // in inches
-  weight: string; // in ounces
-  timeMultiplier: number; // multiplier for base cooking time
+  diameter: string;
+  weight: string;
+  timeMultiplier: number;
   emoji: string;
 }
 
