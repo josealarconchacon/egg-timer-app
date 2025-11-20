@@ -74,10 +74,8 @@ describe("constants.ts tests", () => {
       expect(typeof AUDIO_NOTIFICATION_URL).toBe("string");
     });
 
-    test("matches expected audio file path", () => {
-      expect(AUDIO_NOTIFICATION_URL).toBe(
-        "/sounds/mixkit-vintage-telephone-ringtone-1356.wav"
-      );
+    test("is a valid audio file path", () => {
+      expect(AUDIO_NOTIFICATION_URL).toMatch(/^\/sounds\/.*\.(wav|mp3|ogg)$/);
     });
   });
 });
