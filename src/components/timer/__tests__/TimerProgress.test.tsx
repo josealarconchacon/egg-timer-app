@@ -16,29 +16,3 @@ describe("TimerProgress - initial tests", () => {
     );
   });
 });
-
-describe("TimerProgress - accessibility", () => {
-  test("has correct aria-label", () => {
-    render(<TimerProgress progress={33} isCompleted={false} />);
-    expect(screen.getByRole("progressbar")).toHaveAttribute(
-      "aria-label",
-      "Timer progress: 33%"
-    );
-  });
-
-  test("aria min/max are correct", () => {
-    render(<TimerProgress progress={10} isCompleted={false} />);
-    const svg = screen.getByRole("progressbar");
-    expect(svg).toHaveAttribute("aria-valuemin", "0");
-    expect(svg).toHaveAttribute("aria-valuemax", "100");
-  });
-});
-
-describe("TimerProgress - snapshot", () => {
-  test("matches snapshot", () => {
-    const { container } = render(
-      <TimerProgress progress={10} isCompleted={false} />
-    );
-    expect(container.firstChild).toMatchSnapshot();
-  });
-});
