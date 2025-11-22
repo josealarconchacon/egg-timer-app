@@ -27,3 +27,16 @@ describe("TimerDisplay - accessibility", () => {
     expect(screen.getByRole("timer")).toHaveAttribute("aria-live", "polite");
   });
 });
+
+describe("TimerDisplay - completed state", () => {
+  test("shows 'Done! 🎉' message when completed", () => {
+    render(<TimerDisplay timeLeft={0} isCompleted={true} />);
+    expect(screen.getByText("Done! 🎉")).toBeInTheDocument();
+  });
+
+  test("applies green styling on completion", () => {
+    render(<TimerDisplay timeLeft={0} isCompleted={true} />);
+    const timer = screen.getByRole("timer");
+    expect(timer.className).toContain("text-green-600");
+  });
+});
