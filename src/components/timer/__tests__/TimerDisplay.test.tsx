@@ -12,3 +12,18 @@ describe("TimerDisplay - basic render", () => {
     expect(screen.getByRole("timer")).toHaveTextContent("formatted-120");
   });
 });
+
+describe("TimerDisplay - accessibility", () => {
+  test("provides correct aria-label", () => {
+    render(<TimerDisplay timeLeft={95} isCompleted={false} />);
+    expect(screen.getByRole("timer")).toHaveAttribute(
+      "aria-label",
+      "Time remaining: formatted-95"
+    );
+  });
+
+  test("aria-live is polite", () => {
+    render(<TimerDisplay timeLeft={50} isCompleted={false} />);
+    expect(screen.getByRole("timer")).toHaveAttribute("aria-live", "polite");
+  });
+});
